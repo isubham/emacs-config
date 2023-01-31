@@ -1,0 +1,245 @@
+#+TITLE: subham's emacs config
+#+AUTHOR: subham kumar <subhamkumarchandrawansi@gmail.com>
+
+* package management
+
+
+** Setup package.el to work with melpa
+package manager uses ELPA
+MELPA have more plugins
+
+#+begin_src emacs-lisp
+
+  (require 'package)
+  (add-to-list 'package-archives
+  '("melpa" . "https://melpa.org/packages/"))
+  ;; (package-refresh-contents)
+  (package-initialize)
+
+#+end_src
+
+** Installing use-package
+referring to package in emacs
+
+#+begin_src emacs-lisp
+
+  (unless (package-installed-p 'use-package)
+    (package-install 'use-package))
+
+#+end_src
+
+
+* Dashboard
+
+#+begin_src emacs-lisp
+
+  ;; (use-package dashboard
+  ;;   :ensure t
+  ;;   :init
+  ;;   (setq dashboard-set-heading-icons t)
+  ;;   (setq dashboard-set-file-icons t)
+
+  ;;   (setq dashboard-banner-logo-title "Hii")
+
+  ;;   ;; set later on
+  ;;   ;; (setq dashboard-startup-banner ".")
+
+  ;;   (setq dashboard-center-content nil)
+  ;;   (setq dashboard-items '((recent . 5)
+  ;; 				(agenda . 5)
+  ;; 				(bookmarks . 5)
+  ;; 				(project . 5)
+  ;; 				(reqisters . 5)))
+
+  ;;   :config
+  ;;   (dashboard-setup-startup-hook)
+  ;;   (dashboard-modify-heading-icons '((recents . "file-text") (bookmarks . "book"))))
+
+#+end_src
+
+ 
+* Projectile
+
+#+begin_src emacs-lisp
+
+    (use-package projectile
+	:ensure t
+  :config (projectile-global-mode 1))
+
+#+end_src
+
+
+* Evil mode
+vim keybindings
+
+#+begin_src emacs-lisp
+
+     (use-package evil ;; 
+     :ensure t ;; install evil if not installed
+     :init ;; tweak evil's configurations before loading it
+     (setq evil-want-integration t)
+     (setq evil-want-keybinding nil)
+     (setq evil-vsplit-window-right t)
+     (setq evil-split-window-below t)
+     (evil-mode))
+
+  ;; collection of programs ibuffer, dired mode to use 
+    (use-package evil-collection 
+    :after evil
+    :ensure t
+    :config
+    (evil-collection-init))
+
+#+end_src
+
+
+* use-package
+simplified package management, just use
+(use-package <pakckage-name>
+:ensure
+:config
+:init
+
+
+* Which key
+
+
+#+begin_src emacs-lisp
+
+  (use-package which-key
+  :ensure t)
+  (which-key-mode)
+  
+
+#+end_src
+
+* Themes
+
+#+begin_src emacs-lisp
+  (use-package doom-themes
+  :ensure t)
+  (setq doom-themes-enable-bold t
+  doom-themes-enable-italic t)
+  (load-theme 'doom-one t)
+  ;; modeline
+  (use-package doom-modeline
+  :ensure t)
+  (doom-modeline-mode 1)
+#+end_src
+
+
+* Fonts
+
+#+begin_src emacs-lisp
+  
+ ;; (set-face-attribute 'default nil
+ ;;   :font "SauceCodePro Nerd Font 11"
+ ;;   :weight 'medium)
+ ;; (set-face-attribute 'variable-pitch nil
+ ;; :font "Ubuntu Nerd Font 11"
+ ;; :weight 'medium)
+ ;; (set-face-attribute 'fixed-pitch nil
+ ;; :font "SauceCodePro Nerd Font 11"
+ ;; :weight 'medium)
+
+ ;; (setq-default line-spacing 0.10)
+
+ ;; (add-to-list 'default-frame-alist '(font . "SauceCodePro Nerd Font 11"))
+
+#+end_src
+
+** Zooming in and out
+
+
+#+begin_src emacs-lisp
+;;  (global-set-key (kbd "C-=") 'text-scale-increase)
+
+;; (global-set-key (kbd "C-=") 'text-scale-increase)
+
+
+#+end_src
+
+
+  
+* GUI
+
+** disable menu, toolbar and scrollbar
+#+begin_src emacs-lisp
+
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+
+(setq inhibit-startup-message t)
+(setq initial-scratch-message nil)
+
+#+end_src
+
+** Display line number and truncated lines
+#+begin_src emacs-lisp
+
+  (global-display-line-numbers-mode 1)
+  (global-visual-line-mode t)
+
+#+end_src
+
+
+
+
+
+* Emacs Server
+when emacs has lots of packages, running as a server will
+
+#+begin_src emacs-lisp
+
+  (server-start)
+
+#+end_src
+
+
+* Treemacs for file explorer
+
+#+begin_src emacs-lisp
+
+  (use-package treemacs
+  :ensure t)
+  (treemacs)
+
+#+end_src
+
+* Literate programming
+
+all languages
+https://orgmode.org/worg/org-contrib/babel/languages/index.html
+
+Node.js
+https://orgmode.org/worg/org-contrib/babel/languages/ob-doc-js.html
+
+** Node.js
+#+begin_src emacs-lisp
+
+  (use-package ob-js)
+  (add-to-list 'org-babel-load-languages '(js t))
+  (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
+  (add-to-list 'org-babel-tangle-lang-exts '("js" . "js"))
+
+#+end_src
+
+** TODO keybinding for executing block
+
+* Org Exports
+
+** Html
+
+#+begin_src emacs-lisp
+
+
+#+end_src
+
+
+
+* References
+
+Distrotube youtube
+https://www.youtube.com/watch?v=hoP4I9ounyQ
+

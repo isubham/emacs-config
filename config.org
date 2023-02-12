@@ -129,24 +129,28 @@ simplified package management, just use
 
 
 * Fonts
+adding unicode support 
+https://www.masteringemacs.org/article/unicode-ligatures-color-emoji
 
 #+begin_src emacs-lisp
   
- ;; (set-face-attribute 'default nil
- ;;   :font "SauceCodePro Nerd Font 11"
- ;;   :weight 'medium)
- ;; (set-face-attribute 'variable-pitch nil
- ;; :font "Ubuntu Nerd Font 11"
- ;; :weight 'medium)
- ;; (set-face-attribute 'fixed-pitch nil
- ;; :font "SauceCodePro Nerd Font 11"
- ;; :weight 'medium)
+;; (use-package unicode-fonts
+;;   :ensure t
+;;   :config
+;;   (unicode-font-setup))
 
- ;; (setq-default line-spacing 0.10)
+(defun my-emoji-fonts ()
+  (set-fontset-font t 'symbol "Noto Color Emoji")
+  (set-fontset-font t 'symbol "Symbola" nil 'append))
 
- ;; (add-to-list 'default-frame-alist '(font . "SauceCodePro Nerd Font 11"))
+  (if (daemonp)
+    (add-hook 'server-after-make-frame-hook #'my-emoji-fonts)
+
+  (my-emoji-fonts))
 
 #+end_src
+
+#+RESULTS:
 
 ** Zooming in and out
 

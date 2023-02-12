@@ -63,19 +63,19 @@ doom-themes-enable-italic t)
 :ensure t)
 (doom-modeline-mode 1)
 
-;; (set-face-attribute 'default nil
-;;   :font "SauceCodePro Nerd Font 11"
-;;   :weight 'medium)
-;; (set-face-attribute 'variable-pitch nil
-;; :font "Ubuntu Nerd Font 11"
-;; :weight 'medium)
-;; (set-face-attribute 'fixed-pitch nil
-;; :font "SauceCodePro Nerd Font 11"
-;; :weight 'medium)
+;; (use-package unicode-fonts
+;;   :ensure t
+;;   :config
+;;   (unicode-font-setup))
 
-;; (setq-default line-spacing 0.10)
+(defun my-emoji-fonts ()
+  (set-fontset-font t 'symbol "Noto Color Emoji")
+  (set-fontset-font t 'symbol "Symbola" nil 'append))
 
-;; (add-to-list 'default-frame-alist '(font . "SauceCodePro Nerd Font 11"))
+  (if (daemonp)
+    (add-hook 'server-after-make-frame-hook #'my-emoji-fonts)
+
+  (my-emoji-fonts))
 
 ;;  (global-set-key (kbd "C-=") 'text-scale-increase)
 

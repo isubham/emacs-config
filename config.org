@@ -240,6 +240,13 @@ https://orgmode.org/worg/org-contrib/babel/languages/ob-doc-js.html
 
 #+end_src
 
+* Ido mode
+#+begin_src emacs-lisp
+
+  (setq indo-enable-flex-matching t)
+  (setq ido-everywhere t)
+(ido-mode 1)
+#+end_src
 
 
 * References
